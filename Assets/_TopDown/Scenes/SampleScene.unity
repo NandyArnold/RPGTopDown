@@ -11454,6 +11454,8 @@ GameObject:
   - component: {fileID: 911009460}
   - component: {fileID: 911009459}
   - component: {fileID: 911009458}
+  - component: {fileID: 911009462}
+  - component: {fileID: 911009463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -11600,6 +11602,49 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeed: 50
   rb: {fileID: 0}
+--- !u!114 &911009462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911009454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2d3397d10987d44a102ec0e63b4c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: -10
+  maxMana: 50
+  currentMana: 0
+  attackDamage: 10
+  attackRange: 1
+  attackCooldown: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onManaChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &911009463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911009454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3492c793e7ab2194a808b259bec75e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &965700245
 GameObject:
   m_ObjectHideFlags: 0
@@ -14889,8 +14934,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1795696715}
   - component: {fileID: 1795696716}
+  - component: {fileID: 1795696717}
   m_Layer: 0
-  m_Name: Knight_idle_01
+  m_Name: VisualPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14966,6 +15012,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1795696717
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795696714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a595b096d74d25488a28e341900b4dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1814962415
 GameObject:
   m_ObjectHideFlags: 0
