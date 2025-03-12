@@ -16,6 +16,7 @@ public class PlayerCombatSystem : MonoBehaviour
     public float attackRange = 1.0f;
     public float attackCooldown = 0.5f;
     public LayerMask enemyLayers; // layers that contain enemyes
+    public float attackFrontDistance = 0.75f;
 
     [Header("Events")]
     public UnityEvent<int, int> onHealthChanged;
@@ -125,6 +126,63 @@ public class PlayerCombatSystem : MonoBehaviour
 
 
     }
+
+
+    public void OnAttackEvent()
+    {
+        Vector2 attackPosition = transform.position;
+        bool isFacingRight = transform.localScale.x > 0;
+
+        if(isFacingRight)
+        {
+            attackPosition.x += attackFrontDistance;
+        }
+        else
+        {
+            attackPosition.x -= attackFrontDistance;
+        }
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            EnemyCombatSystem enemyStats = enemy.GetComponent<EnemyCombatSystem>();
+            if(enemyStats != null)
+            {
+                enemyStats.TakeDamage(attackDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 attackPosition = transform.position;
+        bool isFacingRight = transform.localScale.x > 0;
+
+        if(isFacingRight)
+        {
+            attackPosition.x += attackFrontDistance;
+        }
+        else
+        {
+            attackPosition.x -= attackFrontDistance;
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPosition, attackRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, attackPosition);
+
+
+    }
+
+
+
+
+
+
+
+
 
 
     // Update is called once per frame

@@ -202,6 +202,7 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector3(direction.x < 0 ?1 : -1,1);
         }
 
+
     }
 
     private void HandleAttack()
