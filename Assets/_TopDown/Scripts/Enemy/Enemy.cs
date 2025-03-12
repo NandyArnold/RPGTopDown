@@ -138,7 +138,7 @@ public class Enemy : MonoBehaviour
 
         if(direction.x !=0)
         {
-            transform.localScale = new Vector3(direction.x > 0 ? 1 : -1,1);
+            transform.localScale = new Vector3(direction.x < 0 ? 1 : -1,1);
         }
 
         if (Vector2.Distance(transform.position,targetPosition) < 0.1f)
@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
 
         if(direction.x !=0)
         {
-            transform.localScale = new Vector3(direction.x > 0 ?1 : -1,1,1);
+            transform.localScale = new Vector3(direction.x < 0 ?1 : -1,1);
         }
 
     }

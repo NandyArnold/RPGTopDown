@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      S_png-clipart-arrow-icon-arrow-icon_0: 7794667127410970476
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
