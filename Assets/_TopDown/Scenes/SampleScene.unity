@@ -15021,6 +15021,8 @@ GameObject:
   - component: {fileID: 1564051955}
   - component: {fileID: 1564051954}
   - component: {fileID: 1564051953}
+  - component: {fileID: 1564051959}
+  - component: {fileID: 1564051958}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -15053,7 +15055,9 @@ MonoBehaviour:
   chaseTime: 4
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  obstacleDetectionDistance: 1
+  avoidanceStrength: 1.5
 --- !u!70 &1564051954
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -15188,6 +15192,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 767312854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1564051958
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564051952}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f1885e46c6a00640933337224c889f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1564051959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564051952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff6cb61bc3250a4cb34782890d49c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0
+  attackDamage: 5
+  attackRange: 1
+  attackCooldown: 1
+  experienceReward: 10
+  possibleDrops: []
+  dropChance: 0.3
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1621787634
 GameObject:
   m_ObjectHideFlags: 0

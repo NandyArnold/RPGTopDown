@@ -57,11 +57,10 @@ public class PlayerCombatSystem : MonoBehaviour
     }
 
 
-    [ContextMenu("TakeDamage")]
-    public void TakeDamage()
+    // [ContextMenu("TakeDamage")]  hide from inspector
+    public void TakeDamage(int damage)
     {
-        int damage = 10;
-
+        
         currentHealth -= damage;
 
         onHealthChanged?.Invoke(currentHealth, maxHealth);
