@@ -194,12 +194,18 @@ public class Enemy : MonoBehaviour
         currentSpeed = chaseSpeed;
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
-
-        rb.linearVelocity = direction * currentSpeed;
-
-        if(direction.x !=0)
+        if (Vector2.Distance(transform.position, playerTransform.position) > enemyCombatSystem.attackFrontDistance)
         {
-            transform.localScale = new Vector3(direction.x < 0 ?1 : -1,1);
+
+            rb.linearVelocity = direction * currentSpeed;
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+        if (direction.x != 0)
+        {
+            transform.localScale = new Vector3(direction.x < 0 ? 1 : -1, 1);
         }
 
 

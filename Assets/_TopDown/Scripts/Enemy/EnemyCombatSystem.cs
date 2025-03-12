@@ -15,6 +15,8 @@ public class EnemyCombatSystem : MonoBehaviour
     public int attackDamage = 5;
     public float attackRange = 1.0f;
     public float attackCooldown = 1.0f;
+    public float attackFrontDistance = 1.2f;
+    public LayerMask playerLayer;
 
 
     [Header("Reward Settings")]
@@ -73,7 +75,7 @@ public class EnemyCombatSystem : MonoBehaviour
 
         animator?.SetTrigger("Attack");
 
-        player.TakeDamage(attackDamage);
+    
 
     }
 
@@ -133,4 +135,32 @@ public class EnemyCombatSystem : MonoBehaviour
 
     }
 
+    public void OnAttackEvent()
+    {
+        Vector2  attackPosition = transform.position;
+
+        bool isFacingRight = transform.localScale.x > 0;
+
+        if(isFacingRight)
+        {
+            attackPosition.x += attackFrontDistance;
+        }
+        else
+        {
+            attackPosition.x -= attackFrontDistance;
+        }
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition, attackRange, playerLayer);
+
+        foreach (Collider2D player in hitPlayer)
+        {
+            PlayerCombatSystem playerCombatSystem = player.GetComponent<PlayerCombatSystem>();
+            if(playerCombatSystem != null)
+            {
+                playerCombatSystem.TakeDamage(attackDamage);
+            }
+        }
+
+
+
+    }
 }

@@ -11517,9 +11517,7 @@ GameObject:
   - component: {fileID: 911009460}
   - component: {fileID: 911009459}
   - component: {fileID: 911009458}
-  - component: {fileID: 911009462}
-  - component: {fileID: 911009463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11657,7 +11655,7 @@ Transform:
   m_GameObject: {fileID: 911009454}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.64, y: 0.41, z: -0.7}
+  m_LocalPosition: {x: 55.53, y: 0.82, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11757,49 +11755,6 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeed: 50
   rb: {fileID: 0}
---- !u!114 &911009462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911009454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2d3397d10987d44a102ec0e63b4c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: -10
-  maxMana: 50
-  currentMana: 0
-  attackDamage: 10
-  attackRange: 1
-  attackCooldown: 0.5
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onManaChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerDeath:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &911009463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911009454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3492c793e7ab2194a808b259bec75e96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &965700245
 GameObject:
   m_ObjectHideFlags: 0
@@ -15231,6 +15186,10 @@ MonoBehaviour:
   attackDamage: 5
   attackRange: 1
   attackCooldown: 1
+  attackFrontDistance: 1.2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   experienceReward: 10
   possibleDrops: []
   dropChance: 0.3
@@ -15353,7 +15312,9 @@ GameObject:
   - component: {fileID: 1795696715}
   - component: {fileID: 1795696716}
   - component: {fileID: 1795696717}
-  m_Layer: 0
+  - component: {fileID: 1795696718}
+  - component: {fileID: 1795696719}
+  m_Layer: 9
   m_Name: VisualPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15452,6 +15413,50 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1795696718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795696714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2d3397d10987d44a102ec0e63b4c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  maxMana: 50
+  currentMana: 0
+  attackDamage: 10
+  attackRange: 1
+  attackCooldown: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackFrontDistance: 0.75
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onManaChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1795696719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795696714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3492c793e7ab2194a808b259bec75e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1814962415
 GameObject:
   m_ObjectHideFlags: 0
