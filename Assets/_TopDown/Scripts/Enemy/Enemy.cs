@@ -88,27 +88,30 @@ public class Enemy : MonoBehaviour
         {
             currentState = EnemyState.Attack;
         }
-        else if(distanceToPlayer <= detectionRadius || isChasing)
+        else if(distanceToPlayer <= detectionRadius)
         {
-            bool hasLineOfSight = !Physics2D.Raycast(transform.localToWorldMatrix.GetPosition(), (playerTransform.localToWorldMatrix.GetPosition() - transform.localToWorldMatrix.GetPosition()).normalized, distanceToPlayer, obstacleLayer);
+            bool hasLineOfSight = !Physics2D.Raycast(transform.localToWorldMatrix.GetPosition(),
+                (playerTransform.localToWorldMatrix.GetPosition() - transform.localToWorldMatrix.GetPosition()).normalized, 
+                distanceToPlayer, obstacleLayer);
+
             if(hasLineOfSight)
             {
                 currentState = EnemyState.Chase;
                 isChasing = true;
                 chaseTimer = chaseTime;
             }
-            else if(isChasing)
-            {
-                chaseTimer -= Time.deltaTime;
-                if(chaseTimer <= 0)
-                {
-                    isChasing = false;
-                    currentState = EnemyState.Patrol;
-                }
-
-            }
             else
             {
+                isChasing = false;
+                currentState = EnemyState.Patrol;
+            }
+        }
+        else if (isChasing)
+        {
+            chaseTimer -= Time.deltaTime;
+            if (chaseTimer <= 0)
+            {
+                isChasing = false;
                 currentState = EnemyState.Patrol;
             }
         }

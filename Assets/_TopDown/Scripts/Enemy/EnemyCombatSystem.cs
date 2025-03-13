@@ -7,8 +7,7 @@ public class EnemyCombatSystem : MonoBehaviour
     
     [Header("Health Settings")]
     public int maxHealth = 50;
-    [SerializeField]
-    private int currentHealth;
+    public int currentHealth { get; private set; }
 
     
     [Header("Combat Settings")]
