@@ -83,15 +83,14 @@ public class Enemy : MonoBehaviour
         if (!playerTransform)
             return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        if(distanceToPlayer <= enemyCombatSystem.attackRange)
+        float distanceToPlayer = Vector2.Distance( transform.localToWorldMatrix.GetPosition(), playerTransform.localToWorldMatrix.GetPosition());
+        if(distanceToPlayer <= enemyCombatSystem.attackFrontDistance)
         {
             currentState = EnemyState.Attack;
         }
         else if(distanceToPlayer <= detectionRadius || isChasing)
         {
-            bool hasLineOfSight = !Physics2D.Raycast(transform.position, (playerTransform.position - transform.position).normalized, distanceToPlayer, obstacleLayer);
+            bool hasLineOfSight = !Physics2D.Raycast(transform.localToWorldMatrix.GetPosition(), (playerTransform.localToWorldMatrix.GetPosition() - transform.localToWorldMatrix.GetPosition()).normalized, distanceToPlayer, obstacleLayer);
             if(hasLineOfSight)
             {
                 currentState = EnemyState.Chase;
@@ -123,23 +122,20 @@ public class Enemy : MonoBehaviour
 
 
 
-            switch (currentState)
-            {
-                case EnemyState.Patrol:
-                    HandlePatrol();
-                Debug.Log("Patrolling very chill yes yes yes");
-                    break;
+        switch (currentState)
+        {
+            case EnemyState.Patrol:
+                HandlePatrol();
+                break;
 
-                case EnemyState.Chase:
-                    HandleChase();
-                Debug.Log("I AM CHASING YOU RAAAAWWWRRR");
-                    break;
-                case EnemyState.Attack:
-                    HandleAttack();
-                Debug.Log("SMACK SMACK SMACK!");
-                    break;
+            case EnemyState.Chase:
+                HandleChase();
+                break;
+            case EnemyState.Attack:
+                HandleAttack();
+                break;
 
-            }
+        }
 
 
     }
@@ -197,10 +193,14 @@ public class Enemy : MonoBehaviour
         currentSpeed = chaseSpeed;
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
-        if (Vector2.Distance(transform.position, playerTransform.position) > enemyCombatSystem.attackFrontDistance) {
+        if (Vector2.Distance(transform.localToWorldMatrix.GetPosition(), playerTransform.localToWorldMatrix.GetPosition()) > enemyCombatSystem.attackFrontDistance) 
+        {
 
             rb.linearVelocity = direction * currentSpeed;
-        } else {
+        } 
+        else 
+        {
+            currentState = EnemyState.Attack;
             rb.linearVelocity = Vector2.zero;
         }
         if (direction.x != 0)
@@ -231,12 +231,10 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
-    private void OnDrawnGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
     }
 
 
