@@ -127,13 +127,16 @@ public class Enemy : MonoBehaviour
             {
                 case EnemyState.Patrol:
                     HandlePatrol();
+                Debug.Log("Patrolling very chill yes yes yes");
                     break;
 
                 case EnemyState.Chase:
                     HandleChase();
+                Debug.Log("I AM CHASING YOU RAAAAWWWRRR");
                     break;
                 case EnemyState.Attack:
                     HandleAttack();
+                Debug.Log("SMACK SMACK SMACK!");
                     break;
 
             }
@@ -194,13 +197,10 @@ public class Enemy : MonoBehaviour
         currentSpeed = chaseSpeed;
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
-        if (Vector2.Distance(transform.position, playerTransform.position) > enemyCombatSystem.attackFrontDistance)
-        {
+        if (Vector2.Distance(transform.position, playerTransform.position) > enemyCombatSystem.attackFrontDistance) {
 
             rb.linearVelocity = direction * currentSpeed;
-        }
-        else
-        {
+        } else {
             rb.linearVelocity = Vector2.zero;
         }
         if (direction.x != 0)
@@ -219,7 +219,7 @@ public class Enemy : MonoBehaviour
             return;
 
         float directionX = playerTransform.position.x - transform.position.x;
-        transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
+        transform.localScale = new Vector3(directionX < 0 ? 1 : -1, 1, 1);
 
         if(Time.time -lastAttackTime >= enemyCombatSystem.attackCooldown)
         {

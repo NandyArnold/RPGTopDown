@@ -139,7 +139,7 @@ public class EnemyCombatSystem : MonoBehaviour
     {
         Vector2  attackPosition = transform.position;
 
-        bool isFacingRight = transform.localScale.x > 0;
+        bool isFacingRight = transform.localScale.x < 0;
 
         if(isFacingRight)
         {
