@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fb103b9d7372a419b39a51c14f0ac2, type: 3}
+  m_Name: New Quest
+  m_EditorClassIdentifier: 
+  questName: Exterminate
+  questDescription: Kill 10 enemies to secure the village.
+  questType: 0
+  requiredAmount: 10
+  requireItem: {fileID: 0}
+  isMainQuest: 1
+  rewardItems: []
+  experienceReward: 0
+  questOfferDialogue:
+  - WIll you help us secure the village? Ogres are threatening us from the north.
+    If you could get rid of 10 of them, it would give us room to breathe
+  questActiveDialogue:
+  - Kill ogres to secure the village
+  questCompletedDialogue:
+  - Village secured! you are ready to head to the next town.
