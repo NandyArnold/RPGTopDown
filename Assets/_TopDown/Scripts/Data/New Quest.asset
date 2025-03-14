@@ -16,7 +16,7 @@ MonoBehaviour:
   questDescription: Kill 10 enemies to secure the village.
   questType: 0
   requiredAmount: 10
-  requireItem: {fileID: 0}
+  requiredItem: {fileID: 0}
   isMainQuest: 1
   rewardItems: []
   experienceReward: 0
