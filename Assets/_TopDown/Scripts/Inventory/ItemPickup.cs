@@ -21,6 +21,10 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
         if(wasPickedUp)
         {
+            if(QuestManager.Instance != null)
+            {
+                QuestManager.Instance.ItemCollected(item);
+            }
             Destroy(gameObject);
         }
         else

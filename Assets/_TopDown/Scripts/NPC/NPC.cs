@@ -10,7 +10,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     public string customName;
 
-    public void Interact()
+    public  virtual void Interact()
     {
         if(dialogueData == null)
         {

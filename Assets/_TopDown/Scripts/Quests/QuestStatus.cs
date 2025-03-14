@@ -14,22 +14,23 @@ public class QuestStatus
         
     }
 
-    public bool isCompleted() 
+    public bool IsCompleted() 
         {
         return currentAmount >= quest.requiredAmount;    
     }
 
 
-    public enum QuestState 
-        {
-        NotStarted,
-        Active,
-        Complete,
-        Rewarded
-
-    }
 
 
+}
 
+
+// ENUM MUST BE OUTSIDE OF THE CLASS
+public enum QuestState
+{
+    NotStarted,
+    Active,
+    Complete,
+    Rewarded
 
 }

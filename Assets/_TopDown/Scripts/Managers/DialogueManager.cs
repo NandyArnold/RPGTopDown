@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive;
 
     public static DialogueManager Instance { get; private set; }
+
+    public UnityEvent onDialogueEnded;
 
     private void Awake()
     {
@@ -168,6 +171,8 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = false;
         dialoguePanel.SetActive(false);
 
+        onDialogueEnded?.Invoke();
+
 
     }
 
@@ -177,19 +182,11 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+    
 
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

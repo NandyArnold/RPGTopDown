@@ -91,6 +91,11 @@ public class EnemyCombatSystem : MonoBehaviour
 
         onEnemyDeath?.Invoke();
 
+        if(QuestManager.Instance != null)
+        {
+            QuestManager.Instance.EnemyKilled();
+        }
+
         PlayerCombatSystem player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerCombatSystem>();
 
         if(player !=null)

@@ -66,9 +66,9 @@ public class QuestManager : MonoBehaviour
 
         onQuestUpdated?.Invoke(questStatus);
 
-        if (questStatus.IsCompleted) 
+        if (questStatus.IsCompleted()) 
         {
-            CompletedQuest(quest);
+            CompleteQuest(quest);
         }
     }
 
@@ -78,12 +78,29 @@ public class QuestManager : MonoBehaviour
     {
         foreach (QuestStatus quest in playerQuests) 
         {
-            if (quest.state == QuestState.Active && quest.quest.questType == QuestType.CollecItems && quest.quest.requiredItem == item) 
+            if (quest.state == QuestState.Active && quest.quest.questType == QuestType.KillEnemies) 
             {
                 UpdateQuestProgress(quest.quest, 1);
             }
         }
     }
+
+
+    public void ItemCollected(Item item)
+    {
+        foreach(QuestStatus quest in playerQuests)
+        {
+            if(quest.state == QuestState.Active &&
+                quest.quest.questType == QuestType.CollecItems &&
+                quest.quest.requiredItem == item)
+            {
+                UpdateQuestProgress(quest.quest, 1);
+            }
+
+        }
+
+    }
+
 
 
 
@@ -107,7 +124,7 @@ public class QuestManager : MonoBehaviour
     {
         QuestStatus questStatus = GetQuestStatus(quest);
 
-            if (questStatus == null || questStatus.state |= QuestState.Complete)
+            if (questStatus == null || questStatus.state != QuestState.Complete)
             return;
 
         if (quest.rewardItems != null && quest.rewardItems.Length > 0) 
