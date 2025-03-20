@@ -17,8 +17,8 @@ public class QuestUI : MonoBehaviour
     public InputActionReference toggleQuestLogAction;
 
     [Header("UI Settings")]
-    private Color activeQuestColor = Color.white;
-    private Color completeQuestColor = Color.green;
+    public Color activeQuestColor = Color.white;
+    public Color completeQuestColor = Color.green;
     public Color returnInQuestColor = Color.yellow;
 
     private List<GameObject> questEntries = new List<GameObject>();
@@ -134,7 +134,7 @@ public class QuestUI : MonoBehaviour
 
         foreach(QuestStatus quest in activeQuests)
         {
-            if(quest.state == QuestState.Active || quest.state == quest.Complete)
+            if(quest.state == QuestState.Active || quest.state == QuestState.Complete)
             {
                 CreateQuestEntry(quest);
             }
@@ -161,7 +161,7 @@ public class QuestUI : MonoBehaviour
 
         if(questNameText !=null)
         {
-            questNameText = "No active quests";
+            questNameText.text = "No active quests";
         }
 
         if(questDescriptionText != null)
