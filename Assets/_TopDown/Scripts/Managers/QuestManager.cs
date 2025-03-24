@@ -20,11 +20,21 @@ public class QuestManager : MonoBehaviour
 
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
+            return;
         }
-        else 
-        {
-            Instance = this;
-        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (onQuestStarted == null)
+            onQuestStarted = new UnityEvent<QuestStatus>();
+
+        if (onQuestUpdated == null)
+            onQuestUpdated = new UnityEvent<QuestStatus>();
+
+        if (onQuestCompleted == null)
+            onQuestCompleted = new UnityEvent<QuestStatus>();
+
 
     }
 
@@ -162,4 +172,111 @@ public class QuestManager : MonoBehaviour
     {
         return playerQuests;
     }
+
+    public void SaveQuestData()
+    {
+        List<QuestSaveData> saveDataList = new List<QuestSaveData>();
+
+        foreach(QuestStatus questStatus in playerQuests)
+        {
+            if(questStatus.quest)
+            {
+                QuestSaveData saveData = new QuestSaveData
+                {
+                    questName = questStatus.quest.name, state = questStatus.state, currentAmount = questStatus.currentAmount
+                };
+                saveDataList.Add(saveData);
+            }
+        }
+
+        QuestSaveList saveList = new QuestSaveList { quests = saveDataList.ToArray() };
+        string json = JsonUtility.ToJson(saveList);
+
+        PlayerPrefs.SetString("QuestData", json);
+        PlayerPrefs.Save();
+
+        Debug.Log($"saved Quests: {saveDataList.Count} quests");
+    }
+
+    public void LoadQuestData()
+    {
+        if(!PlayerPrefs.HasKey("QuestData"))
+        {
+            Debug.Log("No quest data found");
+            return;
+        }
+
+        string json = PlayerPrefs.GetString("QuestData");
+        QuestSaveList saveList = JsonUtility.FromJson<QuestSaveList>(json);
+
+        if(saveList == null || saveList.quests == null)
+        {
+            Debug.LogWarning("Failed to load quest data");
+            return;
+        }
+
+        playerQuests.Clear();
+
+        foreach(QuestSaveData saveData in saveList.quests)
+        {
+            QuestData questData = Resources.Load<QuestData>("Quests/" + saveData.questName);
+
+            if(questData)
+            {
+                QuestStatus questStatus = new QuestStatus(questData);
+                questStatus.state = saveData.state;
+                questStatus.currentAmount = saveData.currentAmount;
+
+                playerQuests.Add(questStatus);
+
+                Debug.Log($"Quests Loaded: {questData.questName}, State: {questStatus.state}, " +
+                    $"Progression: {questStatus.currentAmount}/{questData.requiredAmount}");     
+            }
+            else
+            {
+                Debug.LogWarning($"Can't find the following quest: {saveData.questName}");
+            }
+        }
+
+        NotifyQuestsLoaded();
+    }
+
+    private void NotifyQuestsLoaded()
+    {
+        foreach(QuestStatus quest in playerQuests)
+        {
+            switch(quest.state)
+            {
+                case QuestState.Active:
+                    onQuestStarted?.Invoke(quest);
+                    break;
+                case QuestState.Complete:
+                    onQuestCompleted?.Invoke(quest);
+                    break;
+            }
+        }
+    }
+
+
+    public void LocationVisited(string locationName)
+    {
+        foreach(QuestStatus quest in playerQuests)
+        {
+            if(quest.state == QuestState.Active &&
+                quest.quest.questType == QuestType.VisitLocation &&
+                quest.quest.locationName == locationName)
+            {
+                UpdateQuestProgress(quest.quest, quest.quest.requiredAmount);
+
+                Debug.Log($"Visiting quest completed :{quest.quest.questName}, at the following location: {locationName}");
+            }
+        }
+    }
+
 }
+
+
+
+
+
+

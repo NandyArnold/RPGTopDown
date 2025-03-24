@@ -25,13 +25,18 @@ public class QuestData : ScriptableObject
     public string[] questActiveDialogue;
     [TextArea(2, 5)]
     public string[] questCompletedDialogue;
+
+    [Header("Visit Location Settings")]
+    public string targetSceneName;
+    public string locationName;
 }
 
 public enum QuestType 
     {
     KillEnemies,
     CollecItems,
-    TalkToNPC
+    TalkToNPC,
+    VisitLocation
 }
 
 
