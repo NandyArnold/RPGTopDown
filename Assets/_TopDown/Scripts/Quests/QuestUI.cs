@@ -179,19 +179,13 @@ public class QuestUI : MonoBehaviour
 
     private List<QuestStatus> GetActiveQuests()
     {
-        List<QuestStatus> activeQuests = new List<QuestStatus>();
 
         if(QuestManager.Instance != null)
         {
-            System.Reflection.FieldInfo field = typeof(QuestManager).GetField("playerQuests",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if(field != null)
-            {
-                activeQuests = field.GetValue(QuestManager.Instance) as List<QuestStatus>;
-            }
+            return QuestManager.Instance.GetActiveQuests();
         }
 
-        return activeQuests ?? new List<QuestStatus>();
+        return new List<QuestStatus>();
     }
 
 

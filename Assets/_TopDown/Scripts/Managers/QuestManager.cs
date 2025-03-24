@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using JetBrains.Annotations;
 using UnityEditor.Build.Content;
+using System;
 
 public class QuestManager : MonoBehaviour
 {
@@ -38,9 +39,9 @@ public class QuestManager : MonoBehaviour
     }
 
     public void StartQuests(QuestData quest) 
-        {
+    {
         if (HasQuest(quest)) 
-            {
+         {
             return;
         }
 
@@ -157,27 +158,8 @@ public class QuestManager : MonoBehaviour
     
     }
 
-
-
-
-
-
-    
-
-    
-        
-
-
-        
-
-
-
-    
-
-
-
-
-
-
-
+    public List<QuestStatus> GetActiveQuests()
+    {
+        return playerQuests;
+    }
 }
