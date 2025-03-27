@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEditor.Rendering;
 public class PlayerInteraction : InputHandler
 {
     [Header("UI References")]
     public GameObject interactionPromptPanel;
     public TextMeshProUGUI interactionPromptText;
+    public TextMeshProUGUI interactionNameText;
+  
 
     private IInteractable currentInteractable;
-
     private void Awake()
     {
         if (interactionPromptPanel != null)
@@ -58,7 +60,9 @@ public class PlayerInteraction : InputHandler
         {
             interactionPromptPanel.SetActive(true);
             interactionPromptText.text = currentInteractable.GetInteractionPrompt();
+            interactionNameText.text = currentInteractable.GetName();
         }
+               
       
         {
 
@@ -82,6 +86,6 @@ public class PlayerInteraction : InputHandler
 
 
     }
-
+   
 
 }

@@ -23,6 +23,7 @@ public class ScenePortal : MonoBehaviour, IInteractable
         return interactionPrompt;
     }
 
+   
     public void Interact()
     {
         if(requiresInteraction)
@@ -46,5 +47,8 @@ public class ScenePortal : MonoBehaviour, IInteractable
         }
     }
 
-
+    public string GetName()
+    {
+        return portalName;
+    }
 }

@@ -10,6 +10,16 @@ public class ItemPickup : MonoBehaviour, IInteractable
         return "Press E to Pick-Up" + item.itemName;
     }
 
+    public string GetName()
+    {
+        return item.itemName;
+    }
+
+    public string GetNameOfObject()
+    {
+        return item.itemName;
+    }
+
     public void Interact()
     {
         Pickup();

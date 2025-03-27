@@ -50,7 +50,10 @@ public class DialogueManager : MonoBehaviour
         {
             continueDialogueAction.action.started += OnContinueDialogueInput;
         }
-
+        if(true)
+        {
+            
+        }
 
     }
 

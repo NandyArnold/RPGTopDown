@@ -7,8 +7,9 @@ public class NPC : MonoBehaviour, IInteractable
 
     [Header("Custom Settings(Optional)")]
     [Tooltip("")]
-
+    public string nameOfNPC;
     public string customName;
+   
 
     public  virtual void Interact()
     {
@@ -40,15 +41,13 @@ public class NPC : MonoBehaviour, IInteractable
         {
             return "Press E to interact";
         }
-        string name = string.IsNullOrEmpty(customName) ?
-             dialogueData.npcName : customName;
+        string name = string.IsNullOrEmpty(customName) ? dialogueData.npcName : customName;
+
         return "Press E to talk to " + name;
-
-        
-
     }
 
-   
-           
-
+    public string GetName()
+    {
+         return string.IsNullOrEmpty(customName) ? dialogueData.npcName : customName;
+    }
 }
